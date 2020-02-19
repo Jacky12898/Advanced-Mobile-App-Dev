@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>groceries</key>
+		<string></string>
+		<key>date</key>
+		<array>
+			<string>Lemons</string>
+			<string>Celery</string>
+		</array>
+	</dict>
+	<dict>
+		<key>groceries</key>
+		<string></string>
+		<key>date</key>
+		<array>
+			<string>Chicken</string>
+			<string>Garlic</string>
+			<string>Rice</string>
+		</array>
+	</dict>
+	<dict>
+		<key>groceries</key>
+		<string></string>
+		<key>date</key>
+		<array>
+			<string>Spinich</string>
+		</array>
+	</dict>
+	<dict>
+		<key>groceries</key>
+		<string></string>
+		<key>date</key>
+		<array>
+			<string>Mushrooms</string>
+			<string>Potatoes</string>
+		</array>
+	</dict>
+	<dict>
+		<key>groceries</key>
+		<string></string>
+		<key>date</key>
+		<array>
+			<string>Pork</string>
+		</array>
+	</dict>
+</array>
+</plist>
