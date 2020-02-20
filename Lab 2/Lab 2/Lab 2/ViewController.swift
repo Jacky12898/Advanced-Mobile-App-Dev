@@ -12,6 +12,8 @@ class ViewController: UITableViewController {
     
     var groceriesList = [String]()
     var groceriesDataController = GroceriesDataController()
+    
+    var searchController = UISearchController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +23,24 @@ class ViewController: UITableViewController {
         }
         
         catch{
+            print(error)
+        }
+        
+        do {
+            try groceriesDataController.loadData()
+            groceriesList = groceriesDataController.getGroceries()
+            
+            let resultsController = SearchResultsControllerTableViewController()
+            resultsController.allDates = groceriesList
+            
+            searchController = UISearchController(searchResultsController: resultsController)
+            searchController.searchBar.placeholder = "Filter"
+            searchController.searchBar.sizeToFit()
+            
+            tableView.tableHeaderView = searchController.searchBar
+            searchController.searchResultsUpdater = resultsController
+            
+        } catch {
             print(error)
         }
     }
@@ -35,6 +55,20 @@ class ViewController: UITableViewController {
            cell.textLabel?.text = groceriesList[indexPath.row]
            
            return cell
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "DateSegue" {
+            
+            let detailVC = segue.destination as! DetailViewController
+            let indexPath = tableView.indexPath(for: sender as! UITableViewCell)
+            
+            if let selection = indexPath?.row {
+                detailVC.selectedList = selection
+                detailVC.title = groceriesList[selection]
+                detailVC.groceriesDataController = groceriesDataController
+            }
+        }
     }
 }
 

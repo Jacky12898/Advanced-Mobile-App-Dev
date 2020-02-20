@@ -4,7 +4,7 @@
 <array>
 	<dict>
 		<key>groceries</key>
-		<string></string>
+		<string>2/1</string>
 		<key>date</key>
 		<array>
 			<string>Lemons</string>
@@ -13,7 +13,7 @@
 	</dict>
 	<dict>
 		<key>groceries</key>
-		<string></string>
+		<string>2/8</string>
 		<key>date</key>
 		<array>
 			<string>Chicken</string>
@@ -23,7 +23,7 @@
 	</dict>
 	<dict>
 		<key>groceries</key>
-		<string></string>
+		<string>2/15</string>
 		<key>date</key>
 		<array>
 			<string>Spinich</string>
@@ -31,7 +31,7 @@
 	</dict>
 	<dict>
 		<key>groceries</key>
-		<string></string>
+		<string>2/22</string>
 		<key>date</key>
 		<array>
 			<string>Mushrooms</string>
@@ -40,7 +40,7 @@
 	</dict>
 	<dict>
 		<key>groceries</key>
-		<string></string>
+		<string>2/29</string>
 		<key>date</key>
 		<array>
 			<string>Pork</string>

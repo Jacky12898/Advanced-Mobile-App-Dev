@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct GroceriesDataModel: Codable{
     var groceries: String
@@ -21,7 +22,7 @@ enum DataError: Error {
 
 class GroceriesDataController{
     var allData = [GroceriesDataModel]()
-    let fileName = "Groceries"
+    let fileName = "groceries"
     
     func loadData() throws{
         if let dataURL = Bundle.main.url(forResource: fileName, withExtension: "plist"){
