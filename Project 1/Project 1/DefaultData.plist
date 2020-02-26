@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>item</key>
+		<string>Hollow Knight</string>
+		<key>url</key>
+		<string>https://store.steampowered.com/app/367520/Hollow_Knight/</string>
+	</dict>
+	<dict>
+		<key>item</key>
+		<string>Teddy Bear</string>
+		<key>url</key>
+		<string>https://www.amazon.com/Aurora-World-Ashford-Teddy-Bear/dp/B004MWDR0W/ref=sr_1_6?keywords=teddy+bear&amp;qid=1582703677&amp;sr=8-6</string>
+	</dict>
+	<dict>
+		<key>item</key>
+		<string>Brother&apos;s Laptop</string>
+		<key>url</key>
+		<string>https://www.newegg.com/charcoal-black-acer-aspire-5-a515-54g-54qq-mainstream/p/N82E16834316760?</string>
+	</dict>
+</array>
+</plist>
