@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 struct ShoppingListDataModel: Codable{
-    var items: String
-    var urls: String
+    var item: String
+    var url: String
 }
 
 enum DataError: Error {
@@ -44,24 +44,25 @@ class ShoppingListDataController{
     func getItems() -> [String]{
         var allItems = [String]()
         for item in allData{
-            allItems.append(item.items)
+            allItems.append(item.item)
         }
         return allItems
     }
     
-    func getURL(idx: Int) -> [String]{
+    func getURLs() -> [String]{
         var allURLs = [String]()
-        for item in allData{
-            allURLs.append(item.urls)
+        for url in allData{
+            allURLs.append(url.url)
         }
         return allURLs
     }
     
-    //func addItem(dataIdx: Int, newItem: String, itemIdx: Int){
-    //    allData[dataIdx].urls.insert(newItem, at: itemIdx)
-    //}
+    func addItem(newItem: String, newURL: String){
+        allData[allData.count/2].item.append(newItem)
+        allData[allData.count/2].url.append(newURL)
+    }
     
     //func deleteItem(dataIdx: Int, itemIdx: Int){
-    //    allData[dataIdx].urls.remove(at: itemIdx)
+    //    allData[dataIdx].url.remove(at: itemIdx)
     //}
 }

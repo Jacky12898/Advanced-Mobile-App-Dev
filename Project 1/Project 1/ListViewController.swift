@@ -12,16 +12,20 @@ class ListViewController: UITableViewController {
 
     var selectedList = 0
     var shoppingListDataController = ShoppingListDataController()
-    var URLList = [String]()
-    
-    override func viewWillAppear(_ animated: Bool) {
-        URLList = shoppingListDataController.getURL(idx: selectedList)
-    }
+    var itemList = [String]()
+    var urlList = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        do{
+            try shoppingListDataController.loadData()
+            itemList = shoppingListDataController.getItems()
+            urlList = shoppingListDataController.getURLs()
+        }
+        
+        catch{
+            print(error)
+        }
     }
     
     @IBAction func unwindSegue(_ segue: UIStoryboardSegue) {
@@ -31,9 +35,10 @@ class ListViewController: UITableViewController {
             
             if source.addedItem.isEmpty == false {
                 
-                //shoppingListDataController.addDate(dataIdx: selectedList, newDate: source.addedDate, dateIdx: dateList.count)
+                shoppingListDataController.addItem(newItem: source.addedItem, newURL: source.addedURL)
                 
-                URLList.append(source.addedURL)
+                itemList.append(source.addedItem)
+                urlList.append(source.addedURL)
                 
                 tableView.reloadData()
             }
@@ -42,20 +47,21 @@ class ListViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return URLList.count
+        return itemList.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath)
 
-        cell.textLabel?.text = URLList[indexPath.row]
+        cell.textLabel?.text = itemList[indexPath.row]
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let url = URL(string: urlList[indexPath.row]){
+            UIApplication.shared.open(url, options: [:])
+        }
     }
 
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -64,7 +70,7 @@ class ListViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            URLList.remove(at: indexPath.row)
+            itemList.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
@@ -72,9 +78,10 @@ class ListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
         let fromRow = fromIndexPath.row
         let toRow = to.row
-        //let moveItem = URLList[fromRow]
+        //let moveItem = itemList[fromRow]
         
-        URLList.swapAt(fromRow, toRow)
+        itemList.swapAt(fromRow, toRow)
+        urlList.swapAt(fromRow, toRow)
     }
 
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
