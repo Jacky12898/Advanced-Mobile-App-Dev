@@ -13,6 +13,10 @@ private let reuseIdentifier = "Cell"
 class CollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var images = [String]()
+    
+    let spacing : CGFloat = 8
+    let numberItemsPerRow : CGFloat = 3
+    let spacingBetweenCells : CGFloat = 8
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +53,7 @@ class CollectionViewController: UICollectionViewController, UICollectionViewDele
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CollectionViewCell
         let image = UIImage(named: images[indexPath.row])
         cell.imageView.image = image
         return cell
@@ -66,50 +70,18 @@ class CollectionViewController: UICollectionViewController, UICollectionViewDele
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        var header : HeaderView?
+        var header : HeaderSupplementaryView?
         if kind == UICollectionView.elementKindSectionHeader {
-            header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Header", for: indexPath) as? HeaderView
+            header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Header", for: indexPath) as? HeaderSupplementaryView
             header?.headerLabel.text = "Pokemon Starters"
         }
         
-        var footer : FooterView?
+        var footer : FooterSupplementaryView?
         if kind == UICollectionView.elementKindSectionFooter {
-            footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Footer", for: indexPath) as? FooterView
-            footer?.footerLabel.text = "Select image to view"
+            footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Footer", for: indexPath) as? FooterSupplementaryView
+            footer?.footerLabel.text = String(images.count) + " Pokemon Entries"
         }
         
-        return header!, footer!
+        return header!
     }
-
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
-
 }
