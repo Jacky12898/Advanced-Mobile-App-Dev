@@ -30,6 +30,8 @@ class CollectionViewController: UICollectionViewController, UICollectionViewDele
         layout.minimumLineSpacing = spacing
         layout.minimumInteritemSpacing = spacing
         collectionView.collectionViewLayout = layout
+        
+        //self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
     }
 
     // MARK: - Navigation
@@ -69,17 +71,25 @@ class CollectionViewController: UICollectionViewController, UICollectionViewDele
         return CGSize.init(width: 50, height: 40)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return CGSize.init(width: 50, height: 40)
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         var header : HeaderSupplementaryView?
         if kind == UICollectionView.elementKindSectionHeader {
             header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Header", for: indexPath) as? HeaderSupplementaryView
-            header?.headerLabel.text = "Pokemon Starters"
+            header?.headerLabel.text = "Select to view"
+            
+            return header!
         }
-        
-        var footer : FooterSupplementaryView?
-        if kind == UICollectionView.elementKindSectionFooter {
+
+        else if kind == UICollectionView.elementKindSectionFooter {
+            var footer : FooterSupplementaryView?
             footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Footer", for: indexPath) as? FooterSupplementaryView
             footer?.footerLabel.text = String(images.count) + " Pokemon Entries"
+            
+            return footer!
         }
         
         return header!
