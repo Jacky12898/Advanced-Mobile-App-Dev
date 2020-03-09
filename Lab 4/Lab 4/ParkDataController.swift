@@ -20,7 +20,7 @@ class ParkDataController {
 
     func loadJson(stateCode: String) {
         let urlPath = "https://developer.nps.gov/api/v1/parks?stateCode=\(stateCode)&api_key=yzJGwRXZQUNk9hwWhpD0lxwSldkyZLV3bqaa5oQW"
-        
+        print(urlPath)
         guard let url = URL(string: urlPath) else {
             print("Bad url")
             return

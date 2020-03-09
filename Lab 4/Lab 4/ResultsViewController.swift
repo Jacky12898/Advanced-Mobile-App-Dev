@@ -27,7 +27,7 @@ class ResultsViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ParkCell", for: indexPath)
         cell.textLabel!.text = results[indexPath.row].name
         return cell
     }
@@ -39,7 +39,6 @@ class ResultsViewController: UITableViewController {
             let idx = tableView.indexPath(for: sender as! UITableViewCell)
             let selectedPark = results[idx!.row]
             
-            
             let detailVC = segue.destination as! DetailViewController
             
             detailVC.title = selectedPark.name
@@ -47,5 +46,4 @@ class ResultsViewController: UITableViewController {
             detailVC.siteDescription = selectedPark.description
         }
     }
-
 }
