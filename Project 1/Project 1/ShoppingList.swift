@@ -24,7 +24,7 @@ class ShoppingListDataController{
     var allData = [ShoppingListDataModel]()
     
     let fileName = "DefaultData"
-    let dataFileName = "DefaultData"
+    let dataFileName = "UserData"
     
     init() {
         let app = UIApplication.shared
@@ -33,13 +33,7 @@ class ShoppingListDataController{
     }
     
     func getDataFile(dataFile: String) -> URL {
-        //let dirPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        
-        //let docDir = dirPath[0]
-        //print(docDir.appendingPathComponent(dataFile))
         return Bundle.main.url(forResource: dataFileName, withExtension: "plist")!
-        
-        //return docDir.appendingPathComponent(dataFile)
     }
     
     @objc func writeData(_ notification: NSNotification) throws {
@@ -60,13 +54,13 @@ class ShoppingListDataController{
         let pathURL: URL?
         let dataFileURL = getDataFile(dataFile: dataFileName)
         print(dataFileURL.path)
-        //if FileManager.default.fileExists(atPath: dataFileURL.path){
-        //    pathURL = dataFileURL
-        //}
+        if FileManager.default.fileExists(atPath: dataFileURL.path){
+            pathURL = dataFileURL
+        }
         
-        //else{
+        else{
             pathURL = Bundle.main.url(forResource: fileName, withExtension: "plist")
-        //}
+        }
         
         print(pathURL!)
         
@@ -103,13 +97,10 @@ class ShoppingListDataController{
     }
     
     func addItem(dataIdx: Int, newItem: String, newURL: String){
-        allData[allData.count/2].item.append(newItem)
-        allData[allData.count/2].url.append(newURL)
-
+        allData.insert(ShoppingListDataModel(item: newItem, url: newURL), at: dataIdx)
     }
     
     func deleteItem(dataIdx: Int){
-        allData[dataIdx].item.removeAll()
-        allData[dataIdx].url.removeAll()
+        allData.remove(at: dataIdx)
     }
 }

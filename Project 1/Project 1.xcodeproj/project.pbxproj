@@ -17,6 +17,7 @@
 		8560A193240659DB00182DC6 /* DefaultData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8560A192240659DB00182DC6 /* DefaultData.plist */; };
 		8560A195240662B900182DC6 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8560A194240662B900182DC6 /* AddItemViewController.swift */; };
 		8560A1972406634D00182DC6 /* ShoppingList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8560A1962406634D00182DC6 /* ShoppingList.swift */; };
+		B811878F24183F9C0086BBB3 /* UserData.plist in Resources */ = {isa = PBXBuildFile; fileRef = B811878E24183F9C0086BBB3 /* UserData.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		8560A192240659DB00182DC6 /* DefaultData.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = DefaultData.plist; sourceTree = "<group>"; };
 		8560A194240662B900182DC6 /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		8560A1962406634D00182DC6 /* ShoppingList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingList.swift; sourceTree = "<group>"; };
+		B811878E24183F9C0086BBB3 /* UserData.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = UserData.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 				8560A1852406445B00182DC6 /* LaunchScreen.storyboard */,
 				8560A1882406445B00182DC6 /* Info.plist */,
 				8560A192240659DB00182DC6 /* DefaultData.plist */,
+				B811878E24183F9C0086BBB3 /* UserData.plist */,
 			);
 			path = "Project 1";
 			sourceTree = "<group>";
@@ -140,6 +143,7 @@
 				8560A193240659DB00182DC6 /* DefaultData.plist in Resources */,
 				8560A1872406445B00182DC6 /* LaunchScreen.storyboard in Resources */,
 				8560A1842406445B00182DC6 /* Assets.xcassets in Resources */,
+				B811878F24183F9C0086BBB3 /* UserData.plist in Resources */,
 				8560A1822406445900182DC6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

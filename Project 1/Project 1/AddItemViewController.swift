@@ -23,10 +23,11 @@ class AddItemViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "save" {
             if itemText.text?.isEmpty == false && urlText.text?.isEmpty == false{
-                addedItem = itemText.text!
-                addedURL = urlText.text!
+                if urlText.text!.contains("http://") || urlText.text!.contains("https://"){
+                    addedItem = itemText.text!
+                    addedURL = urlText.text!
+                }
             }
         }
     }
-
 }

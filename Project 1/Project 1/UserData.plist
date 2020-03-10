@@ -4,9 +4,9 @@
 <array>
 	<dict>
 		<key>item</key>
-		<string>Example</string>
+		<string>Amazon</string>
 		<key>url</key>
-		<string>https://www.google.com</string>
+		<string>http://www.amazon.com</string>
 	</dict>
 </array>
 </plist>
