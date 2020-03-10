@@ -26,6 +26,8 @@ class ListViewController: UITableViewController {
         catch{
             print(error)
         }
+        self.navigationItem.leftBarButtonItem = self.editButtonItem
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.systemYellow
     }
     
     @IBAction func unwindSegue(_ segue: UIStoryboardSegue) {
@@ -35,7 +37,7 @@ class ListViewController: UITableViewController {
             
             if source.addedItem.isEmpty == false {
                 
-                shoppingListDataController.addItem(newItem: source.addedItem, newURL: source.addedURL)
+                shoppingListDataController.addItem(dataIdx: itemList.count, newItem: source.addedItem, newURL: source.addedURL)
                 
                 itemList.append(source.addedItem)
                 urlList.append(source.addedURL)
@@ -71,6 +73,7 @@ class ListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             itemList.remove(at: indexPath.row)
+            urlList.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
@@ -78,7 +81,6 @@ class ListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
         let fromRow = fromIndexPath.row
         let toRow = to.row
-        //let moveItem = itemList[fromRow]
         
         itemList.swapAt(fromRow, toRow)
         urlList.swapAt(fromRow, toRow)

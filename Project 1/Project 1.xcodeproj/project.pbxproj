@@ -14,7 +14,6 @@
 		8560A1842406445B00182DC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8560A1832406445B00182DC6 /* Assets.xcassets */; };
 		8560A1872406445B00182DC6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8560A1852406445B00182DC6 /* LaunchScreen.storyboard */; };
 		8560A18F2406586300182DC6 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8560A18E2406586300182DC6 /* ListViewController.swift */; };
-		8560A191240659C300182DC6 /* UserData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8560A190240659C300182DC6 /* UserData.plist */; };
 		8560A193240659DB00182DC6 /* DefaultData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8560A192240659DB00182DC6 /* DefaultData.plist */; };
 		8560A195240662B900182DC6 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8560A194240662B900182DC6 /* AddItemViewController.swift */; };
 		8560A1972406634D00182DC6 /* ShoppingList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8560A1962406634D00182DC6 /* ShoppingList.swift */; };
@@ -30,7 +29,6 @@
 		8560A1862406445B00182DC6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8560A1882406445B00182DC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8560A18E2406586300182DC6 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
-		8560A190240659C300182DC6 /* UserData.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = UserData.plist; sourceTree = "<group>"; };
 		8560A192240659DB00182DC6 /* DefaultData.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = DefaultData.plist; sourceTree = "<group>"; };
 		8560A194240662B900182DC6 /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		8560A1962406634D00182DC6 /* ShoppingList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingList.swift; sourceTree = "<group>"; };
@@ -76,7 +74,6 @@
 				8560A1832406445B00182DC6 /* Assets.xcassets */,
 				8560A1852406445B00182DC6 /* LaunchScreen.storyboard */,
 				8560A1882406445B00182DC6 /* Info.plist */,
-				8560A190240659C300182DC6 /* UserData.plist */,
 				8560A192240659DB00182DC6 /* DefaultData.plist */,
 			);
 			path = "Project 1";
@@ -142,7 +139,6 @@
 			files = (
 				8560A193240659DB00182DC6 /* DefaultData.plist in Resources */,
 				8560A1872406445B00182DC6 /* LaunchScreen.storyboard in Resources */,
-				8560A191240659C300182DC6 /* UserData.plist in Resources */,
 				8560A1842406445B00182DC6 /* Assets.xcassets in Resources */,
 				8560A1822406445900182DC6 /* Main.storyboard in Resources */,
 			);

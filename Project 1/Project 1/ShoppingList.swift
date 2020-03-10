@@ -22,10 +22,55 @@ enum DataError: Error {
 
 class ShoppingListDataController{
     var allData = [ShoppingListDataModel]()
+    
     let fileName = "DefaultData"
+    let dataFileName = "DefaultData"
+    
+    init() {
+        let app = UIApplication.shared
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(ShoppingListDataController.writeData(_:)), name: UIApplication.willResignActiveNotification, object: app)
+    }
+    
+    func getDataFile(dataFile: String) -> URL {
+        //let dirPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        
+        //let docDir = dirPath[0]
+        //print(docDir.appendingPathComponent(dataFile))
+        return Bundle.main.url(forResource: dataFileName, withExtension: "plist")!
+        
+        //return docDir.appendingPathComponent(dataFile)
+    }
+    
+    @objc func writeData(_ notification: NSNotification) throws {
+        let dataFileURL = getDataFile(dataFile: dataFileName)
+        let encoder = PropertyListEncoder()
+        encoder.outputFormat = .xml
+        
+        do {
+            let data = try encoder.encode(allData.self)
+            try data.write(to: dataFileURL)
+            
+        } catch {
+            throw DataError.CouldNotEncode
+        }
+    }
     
     func loadData() throws{
-        if let dataURL = Bundle.main.url(forResource: fileName, withExtension: "plist"){
+        let pathURL: URL?
+        let dataFileURL = getDataFile(dataFile: dataFileName)
+        print(dataFileURL.path)
+        //if FileManager.default.fileExists(atPath: dataFileURL.path){
+        //    pathURL = dataFileURL
+        //}
+        
+        //else{
+            pathURL = Bundle.main.url(forResource: fileName, withExtension: "plist")
+        //}
+        
+        print(pathURL!)
+        
+        if let dataURL = pathURL{
             let decoder = PropertyListDecoder()
             do{
                 let data = try Data(contentsOf: dataURL)
@@ -57,12 +102,14 @@ class ShoppingListDataController{
         return allURLs
     }
     
-    func addItem(newItem: String, newURL: String){
+    func addItem(dataIdx: Int, newItem: String, newURL: String){
         allData[allData.count/2].item.append(newItem)
         allData[allData.count/2].url.append(newURL)
+
     }
     
-    //func deleteItem(dataIdx: Int, itemIdx: Int){
-    //    allData[dataIdx].url.remove(at: itemIdx)
-    //}
+    func deleteItem(dataIdx: Int){
+        allData[dataIdx].item.removeAll()
+        allData[dataIdx].url.removeAll()
+    }
 }
