@@ -22,10 +22,49 @@ enum DataError: Error {
 
 class ShoppingListDataController{
     var allData = [ShoppingListDataModel]()
+    
     let fileName = "DefaultData"
+    let dataFileName = "UserData"
+    
+    init() {
+        let app = UIApplication.shared
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(ShoppingListDataController.writeData(_:)), name: UIApplication.willResignActiveNotification, object: app)
+    }
+    
+    func getDataFile(dataFile: String) -> URL {
+        return Bundle.main.url(forResource: dataFileName, withExtension: "plist")!
+    }
+    
+    @objc func writeData(_ notification: NSNotification) throws {
+        let dataFileURL = getDataFile(dataFile: dataFileName)
+        let encoder = PropertyListEncoder()
+        encoder.outputFormat = .xml
+        
+        do {
+            let data = try encoder.encode(allData.self)
+            try data.write(to: dataFileURL)
+            
+        } catch {
+            throw DataError.CouldNotEncode
+        }
+    }
     
     func loadData() throws{
-        if let dataURL = Bundle.main.url(forResource: fileName, withExtension: "plist"){
+        let pathURL: URL?
+        let dataFileURL = getDataFile(dataFile: dataFileName)
+        print(dataFileURL.path)
+        if FileManager.default.fileExists(atPath: dataFileURL.path){
+            pathURL = dataFileURL
+        }
+        
+        else{
+            pathURL = Bundle.main.url(forResource: fileName, withExtension: "plist")
+        }
+        
+        print(pathURL!)
+        
+        if let dataURL = pathURL{
             let decoder = PropertyListDecoder()
             do{
                 let data = try Data(contentsOf: dataURL)
@@ -57,12 +96,11 @@ class ShoppingListDataController{
         return allURLs
     }
     
-    func addItem(newItem: String, newURL: String){
-        allData[allData.count/2].item.append(newItem)
-        allData[allData.count/2].url.append(newURL)
+    func addItem(dataIdx: Int, newItem: String, newURL: String){
+        allData.insert(ShoppingListDataModel(item: newItem, url: newURL), at: dataIdx)
     }
     
-    //func deleteItem(dataIdx: Int, itemIdx: Int){
-    //    allData[dataIdx].url.remove(at: itemIdx)
-    //}
+    func deleteItem(dataIdx: Int){
+        allData.remove(at: dataIdx)
+    }
 }

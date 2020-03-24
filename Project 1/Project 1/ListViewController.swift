@@ -26,24 +26,43 @@ class ListViewController: UITableViewController {
         catch{
             print(error)
         }
+        self.navigationItem.leftBarButtonItem = self.editButtonItem
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.systemYellow
     }
     
     @IBAction func unwindSegue(_ segue: UIStoryboardSegue) {
-        
         if segue.identifier == "save" {
             let source = segue.source as! AddItemViewController
             
             if source.addedItem.isEmpty == false {
                 
-                shoppingListDataController.addItem(newItem: source.addedItem, newURL: source.addedURL)
+                shoppingListDataController.addItem(dataIdx: itemList.count, newItem: source.addedItem, newURL: source.addedURL)
                 
                 itemList.append(source.addedItem)
                 urlList.append(source.addedURL)
                 
                 tableView.reloadData()
             }
+            
+            else{
+                let alert = UIAlertController(title: nil, message: "Not a valid URL", preferredStyle: .alert)
+                let okAction = UIAlertAction(
+                       title: "Ok", style: .default, handler: nil)
+                
+                alert.addAction(okAction)
+                
+                if presentedViewController == nil {
+                     self.present(alert, animated: true, completion: nil)
+                }
+                    
+                else{
+                    self.dismiss(animated: true) { () -> Void in
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
         }
     }
+}
 
     // MARK: - Table view data source
 
@@ -70,7 +89,10 @@ class ListViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            shoppingListDataController.deleteItem(dataIdx: indexPath.row)
+            
             itemList.remove(at: indexPath.row)
+            urlList.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
@@ -78,10 +100,15 @@ class ListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
         let fromRow = fromIndexPath.row
         let toRow = to.row
-        //let moveItem = itemList[fromRow]
+        
+        let moveItem = itemList[fromRow]
+        let moveURL = urlList[fromRow]
         
         itemList.swapAt(fromRow, toRow)
         urlList.swapAt(fromRow, toRow)
+        
+        shoppingListDataController.deleteItem(dataIdx: fromRow)
+        shoppingListDataController.addItem(dataIdx: toRow, newItem: moveItem, newURL: moveURL)
     }
 
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {

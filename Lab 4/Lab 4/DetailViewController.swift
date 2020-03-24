@@ -19,23 +19,21 @@ class DetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         descriptionLabel.text = siteDescription
         directionLabel.text = siteDirections
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(DetailViewController.tapFunction))
+
+        directionLabel.isUserInteractionEnabled = true
+        directionLabel.addGestureRecognizer(tap)
+    }
+    
+    @objc func tapFunction(){
+        if let url = URL(string: siteDirections){
+            UIApplication.shared.open(url, options: [:])
+        }
+        print ("Navigating to: " + siteDirections)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
