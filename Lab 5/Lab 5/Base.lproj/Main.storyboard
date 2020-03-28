@@ -47,11 +47,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Contacts" id="uE1-wW-e3G">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="gSG-WW-mSA"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="gSG-WW-mSA">
+                            <connections>
+                                <segue destination="fnk-MR-s7M" kind="presentation" identifier="AddContact" id="aZj-O4-O8v"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <segue destination="fnk-MR-s7M" kind="presentation" identifier="AddContact" id="rOk-1n-ZZL"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cx0-Sw-vix" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -167,7 +168,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HtQ-gE-hLY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="hnr-KO-ZWN" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1042" y="803"/>
+            <point key="canvasLocation" x="1959" y="135"/>
         </scene>
     </scenes>
 </document>
