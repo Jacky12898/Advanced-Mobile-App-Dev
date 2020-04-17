@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@+id/navigation_search">
+
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="com.example.lab6.ui.main.search.SearchFragment"
+        android:label="@string/title_search"
+        tools:layout="@layout/search_fragment" >
+        <action
+            android:id="@+id/action_navigation_search_to_searchResultsFragment"
+            app:destination="@id/searchResultsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchResultsFragment"
+        android:name="com.example.lab6.ui.main.search.SearchResultsFragment"
+        android:label="@string/title_search_results"
+        tools:layout="@layout/search_results_fragment" >
+        <action
+            android:id="@+id/action_searchResultsFragment_to_detail"
+            app:destination="@id/detail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detail"
+        android:name="com.example.lab6.detail"
+        android:label="@string/title_details"
+        tools:layout="@layout/fragment_detail" />
+    <fragment
+        android:id="@+id/last_selected"
+        android:name="com.example.lab6.ui.main.lastSelected.LastSelectedFragment"
+        android:label="@string/title_last_selected"
+        tools:layout="@layout/last_selected_fragment" />
+
+</navigation>

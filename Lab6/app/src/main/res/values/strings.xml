@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Lab 6</string>
+    <string name="title_search">Search</string>
+    <string name="title_search_results">Search Results</string>
+    <string name="title_details">Details</string>
+    <string name="title_last_selected">Last Selected</string>
+    <string name="search_state">Search state</string>
+    <string name="search">Search</string>
+
+    <string name="name">Name</string>
+    <string name="description">Description:</string>
+    <string name="directions">Directions:</string>
+</resources>
