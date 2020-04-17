@@ -16,7 +16,6 @@ import com.example.lab6.ui.main.search.SharedSearchViewModel
 import kotlinx.android.synthetic.main.last_selected_fragment.*
 
 class LastSelectedFragment : Fragment() {
-    private lateinit var sharedSearchViewModel: SharedSearchViewModel
     private lateinit var lastSelectedViewModel: LastSelectedViewModel
 
     override fun onCreateView(
@@ -25,12 +24,6 @@ class LastSelectedFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        sharedSearchViewModel = ViewModelProvider(requireActivity()).get(SharedSearchViewModel::class.java)
-
-        sharedSearchViewModel.selectedPark.observe(viewLifecycleOwner, Observer{
-            (activity as AppCompatActivity?)?.supportActionBar?.title = it.name
-            lastSelectedText.text = it.name
-        })
         lastSelectedViewModel =
             ViewModelProvider(this).get(LastSelectedViewModel::class.java)
         val root = inflater.inflate(R.layout.last_selected_fragment, container, false)

@@ -27,9 +27,10 @@
 
     <fragment
         android:id="@+id/detail"
-        android:name="com.example.lab6.detail"
+        android:name="com.example.lab6.ui.main.search.DetailFragment"
         android:label="@string/title_details"
         tools:layout="@layout/fragment_detail" />
+
     <fragment
         android:id="@+id/last_selected"
         android:name="com.example.lab6.ui.main.lastSelected.LastSelectedFragment"

@@ -11,6 +11,6 @@ interface NPSService {
     @GET
     fun searchParks(@Url url: String): Call<SearchResponse>
 
-    @GET
-    fun parkDetails(@Url parkCode: String): Call<ParkDetails>
+    //@GET
+    //fun parkDetails(@Url parkCode: String): Call<ParkDetails>
 }

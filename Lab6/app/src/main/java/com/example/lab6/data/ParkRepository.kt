@@ -52,25 +52,4 @@ class ParkRepository(val app: Application) {
             }
         }
     }
-
-    val parkSelectedObserver =  Observer<Park> {
-        CoroutineScope(Dispatchers.IO).launch {
-            getParkDetails(it)
-        }
-    }
-
-    val parkDetails = MutableLiveData<ParkDetails>()
-
-    @WorkerThread
-    private suspend fun getParkDetails(forPark: Park) {
-        if(NetworkHelper.networkConnected(app)) {
-            val parkCode = "api/v1/parks?parkCode=${forPark.parkCode}&api_key=${API_KEY}"
-            val response = service.parkDetails(parkCode).execute()
-            if(response.body() != null) {
-                parkDetails.postValue(response.body())
-            } else {
-                Log.e(LOG_TAG, "Could not find parks for ${forPark.parkCode}. Error code ${response.code()}")
-            }
-        }
-    }
 }

@@ -12,12 +12,6 @@ data class SearchResponse (
 data class Park (
     val name: String,
     val states: String,
-    val parkCode: String
-)
-
-@JsonClass(generateAdapter = true)
-data class ParkDetails (
-    val name: String,
     val description: String,
     val directionsUrl: String,
     val parkCode: String

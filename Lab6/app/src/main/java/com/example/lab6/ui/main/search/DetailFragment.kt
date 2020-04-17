@@ -31,15 +31,11 @@ class DetailFragment : Fragment() {
 
         sharedSearchViewModel = ViewModelProvider(requireActivity()).get(SharedSearchViewModel::class.java)
 
-        sharedSearchViewModel.parkDetails.observe(viewLifecycleOwner, Observer {
-            description.text = it.description
-            directions.text = it.directionsUrl
-            name.text = it.name
-        })
-
         sharedSearchViewModel.selectedPark.observe(viewLifecycleOwner, Observer{
             (activity as AppCompatActivity?)?.supportActionBar?.title = it.name
             name.text = it.name
+            description.text = it.description
+            directions.text = it.directionsUrl
         })
         return root
     }

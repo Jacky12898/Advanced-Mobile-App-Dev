@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class LastSelectedViewModel : ViewModel() {
+
     private val _text = MutableLiveData<String>().apply {
         value = "Last Selected Park: "
     }
