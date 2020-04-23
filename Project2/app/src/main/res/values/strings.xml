@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Project 2</string>
+    <string name="title_search">Search</string>
+    <string name="title_list">List</string>
+    <string name="text_keywords">Keywords</string>
+    <string name="text_minPrice">Minimum Price</string>
+    <string name="text_maxPrice">Maximum Price</string>
+    <string name="text_shoppingSite">Shopping Site</string>
+
+    <string-array name="sitesDropdown">
+        <item>Amazon</item>
+        <item>Google Shopping</item>
+        <item>Ebay</item>
+    </string-array>
+</resources>
