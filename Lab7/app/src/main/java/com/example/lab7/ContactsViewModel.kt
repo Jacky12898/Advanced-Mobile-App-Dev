@@ -12,26 +12,29 @@ class ContactsViewModel (app: Application) : AndroidViewModel(app) {
 
     val contactList: MutableLiveData<List<Contacts>> = MutableLiveData()
 
-    private val favoriteListObserver =  Observer<List<Contacts>> {
+    private val contactListObserver =  Observer<List<Contacts>> {
         val allContacts = mutableListOf<Contacts>()
 
-        for(fav in it) {
-            allContacts.add(Contacts().fromRoomContacts(fav))
+        for(contact in it) {
+            allContacts.add(contact)
         }
-
         contactList.value = allContacts
     }
 
     init {
-        contactsRepo.contactsRoomList.observeForever(favoriteListObserver)
+        contactsRepo.contactsRoomList.observeForever(contactListObserver)
     }
 
     override fun onCleared() {
-        contactsRepo.contactsRoomList.removeObserver(favoriteListObserver)
+        contactsRepo.contactsRoomList.removeObserver(contactListObserver)
         super.onCleared()
     }
 
     fun addContact(contact: Contacts) {
         contactsRepo.addContact(contact)
+    }
+
+    fun deleteContact(contact: Contacts) {
+        contactsRepo.deleteContact(contact)
     }
 }

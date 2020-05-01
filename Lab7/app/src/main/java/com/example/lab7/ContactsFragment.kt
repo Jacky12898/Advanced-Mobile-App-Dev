@@ -16,7 +16,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class ContactsFragment : Fragment(), ContactsRecyclerAdapter.ContactItemListener {
     private lateinit var contactsVM: ContactsViewModel
     private lateinit var contactsRecyclerView: RecyclerView
-    private lateinit var adapter: ContactsRecyclerAdapter
     private lateinit var navController: NavController
     private lateinit var actionButton: FloatingActionButton
 
@@ -33,25 +32,21 @@ class ContactsFragment : Fragment(), ContactsRecyclerAdapter.ContactItemListener
         val root = inflater.inflate(R.layout.fragment_contacts, container, false)
         contactsRecyclerView = root.findViewById(R.id.contactsRecyclerView)
 
-        adapter = ContactsRecyclerAdapter(requireContext(), emptyList<Contacts>(), this)
-        contactsRecyclerView.adapter = adapter
-
         contactsVM.contactList.observe(viewLifecycleOwner, Observer {
-            adapter.contactsList = it
-            adapter.notifyDataSetChanged()
+            val adapter = ContactsRecyclerAdapter(requireContext(), it, this)
+            contactsRecyclerView.adapter = adapter
         })
 
         actionButton = root.findViewById(R.id.fab)
         actionButton.setOnClickListener{
-            navController.navigate(R.id.)
+            navController.navigate(R.id.action_contacts_to_add_contact)
         }
 
         return root
     }
 
     // TODO: Program delete on hold down
-    override fun onContactItemClick(contacts: Contacts) {
-        contactsVM.contactSelected(contacts)
-        navController.navigate(R.id.)
+    override fun onContactItemClick(contact: Contacts) {
+        contactsVM.deleteContact(contact)
     }
 }

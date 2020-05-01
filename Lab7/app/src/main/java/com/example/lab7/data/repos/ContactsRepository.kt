@@ -22,15 +22,11 @@ class ContactsRepository(val app: Application) {
         }
     }
 
-    val favoriteDetails: MutableLiveData<Contacts> = MutableLiveData()
-
-    fun getDetailsForRecipe(contact: Contacts) {
-        CoroutineScope((Dispatchers.IO)).launch {
-            val contact_id = contactsDAO.getContact(contact.contact_id).contact_id
-            val name = contactsDAO.getContact(contact.contact_id).name
-            val number = contactsDAO.getContact(contact.contact_id).number
-
-            favoriteDetails.postValue(Contacts(contact_id, name, number))
+    fun deleteContact(contact: Contacts) {
+        CoroutineScope(Dispatchers.IO).launch {
+            contactsDAO.deleteContact(contact)
         }
     }
+
+    val contacts: MutableLiveData<Contacts> = MutableLiveData()
 }

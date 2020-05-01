@@ -3,17 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/contacts">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/contacts"
         android:name="com.example.lab7.ContactsFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_contacts"/>
+        android:label="@string/title_contacts_list"
+        tools:layout="@layout/fragment_contacts">
+        <action
+            android:id="@+id/action_contacts_to_add_contact"
+            app:destination="@id/add_contact" />
+    </fragment>
 
     <fragment
         android:id="@+id/add_contact"
-        android:name="com.example.lab7.ContactsFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_add_contact"/>
+        android:name="com.example.lab7.AddContactFragment"
+        android:label="@string/title_add_contact"
+        tools:layout="@layout/fragment_add_contact">
+        <action
+            android:id="@+id/action_add_contact_to_contacts"
+            app:destination="@id/contacts" />
+    </fragment>
 </navigation>
