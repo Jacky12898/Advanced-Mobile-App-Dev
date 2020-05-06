@@ -3,14 +3,14 @@
 
     <item
         android:id="@+id/navigation_search"
-        android:icon="@android:drawable/ic_menu_search"
-        android:iconTint="@color/white"
-        android:title="@string/title_search" />
+        android:icon="@drawable/search"
+        android:title="@string/title_search"
+        />
+    <!-- Icon made by Those Icons from www.flaticon.com -->
 
     <item
         android:id="@+id/navigation_list"
-        android:icon="@android:drawable/ic_input_get"
-        android:iconTint="@color/white"
-        android:title="@string/title_list" />
-
+        android:icon="@drawable/list"
+        android:title="@string/title_shopping_list" />
+    <!-- Icon made by Kirill Kazachek from www.flaticon.com -->
 </menu>

@@ -1,12 +1,12 @@
 package com.example.project2.ui.search
 
+import android.icu.lang.UCharacter.GraphemeClusterBreak.V
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Button
 import android.widget.EditText
+import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.project2.R
+import com.example.project2.data.database.ShoppingList
 import kotlinx.android.synthetic.main.fragment_search.*
 
 class SearchFragment : Fragment() {
@@ -21,6 +22,8 @@ class SearchFragment : Fragment() {
     private lateinit var searchViewModel: SearchViewModel
     private lateinit var searchButton: Button
     private lateinit var navController: NavController
+    public lateinit var url: String
+    private val web = WebFragment()
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -41,13 +44,15 @@ class SearchFragment : Fragment() {
         return root
     }
 
+
+
     private fun search(){
         val keywords = keywordsText.text.toString();
         val minPrice = minPriceText.text.toString();
         val maxPrice = maxPriceText.text.toString();
         val site = sitesSpinner.selectedItem.toString();
 
-        var url = ""
+        //var url = ""
         when(site){
             "Amazon" -> url = parseAmazonUrl(keywords, minPrice, maxPrice)
             "Google Shopping" -> url = parseGoogleShoppingUrl(keywords, minPrice, maxPrice)
@@ -57,8 +62,9 @@ class SearchFragment : Fragment() {
         Log.i("Data", url);
 
         if(keywords != null && keywords != ""){
-            navController.navigate(R.id.action_navigation_search_to_navigation_web)
+            //web.searchOnWeb(url)
             searchViewModel.url.value = url
+            navController.navigate(R.id.action_navigation_search_to_navigation_web)
         }
     }
 

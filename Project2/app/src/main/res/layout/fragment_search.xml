@@ -100,7 +100,7 @@
         android:id="@+id/sitesSpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:backgroundTint="@color/primaryColor"
         android:entries="@array/sitesDropdown"
         app:layout_constraintEnd_toEndOf="parent"
