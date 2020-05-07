@@ -1,7 +1,6 @@
 package com.example.project2.ui.list
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,6 @@ import androidx.navigation.Navigation
 import com.example.project2.R
 import com.example.project2.data.database.ShoppingList
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_add_item.*
 
 class AddListItemFragment: Fragment(){
     private lateinit var navController: NavController
@@ -42,6 +40,7 @@ class AddListItemFragment: Fragment(){
         if(shoppingListViewModel.replace){
             label.setText(shoppingListViewModel.replaceLabel)
             url.setText(shoppingListViewModel.replaceUrl)
+            shoppingListViewModel.replace = false
         }
 
         saveButton.setOnClickListener{
@@ -64,10 +63,5 @@ class AddListItemFragment: Fragment(){
         }
 
         return root
-    }
-
-    fun replaceText(shoppingListItem: ShoppingList){
-        label.setText(shoppingListItem.label)
-        url.setText(shoppingListItem.url)
     }
 }

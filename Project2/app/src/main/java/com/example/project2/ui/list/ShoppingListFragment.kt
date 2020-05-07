@@ -47,7 +47,6 @@ class ShoppingListFragment : Fragment(), ShoppingListRecyclerAdapter.ShoppingLis
     }
 
     override fun onShoppingListItemClick(shoppingListItem: ShoppingList) {
-        //shoppingListViewModel.deleteShoppingListItem(shoppingListItem)
     }
 
     override fun visit(shoppingListItem: ShoppingList){

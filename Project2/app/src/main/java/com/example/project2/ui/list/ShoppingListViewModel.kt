@@ -13,7 +13,6 @@ class ShoppingListViewModel (app: Application) : AndroidViewModel(app) {
     val shoppingList: MutableLiveData<List<ShoppingList>> = MutableLiveData()
     var replaceLabel: String = ""
     var replaceUrl: String = ""
-    var replaceId: Int = 0
     var replace: Boolean = false
 
     private val shoppingListObserver =  Observer<List<ShoppingList>> {

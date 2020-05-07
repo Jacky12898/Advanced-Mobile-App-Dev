@@ -14,15 +14,17 @@ class ContactsRepository(val app: Application) {
     val contactsList = MutableLiveData<List<Contacts>>()
     private val allData: MutableMap<Int, Contacts> = mutableMapOf()
 
-
     init {
-        db.collection("favorites")
+        db.collection("contacts")
             .addSnapshotListener { snapshot, e ->
                 if(e != null) {
+                    Log.e("data", "Listen failed.", e)
                     return@addSnapshotListener
                 }
                 if (snapshot != null) {
                     parseAllData(snapshot)
+                } else {
+                    Log.d("data", "Current data: null")
                 }
             }
     }
@@ -30,19 +32,19 @@ class ContactsRepository(val app: Application) {
     private fun parseAllData(result: QuerySnapshot) {
         val allContacts = mutableListOf<Contacts>()
         for(doc in result) {
-            val id: Int = doc.id.toInt()
+            val contact_id: Int = doc.id.toInt()
             val name: String = doc.getString("name")!!
-            val number: Int = (doc.get("number") as String).toInt()
+            val number: Int = doc.getLong("number")!!.toInt()
 
             allContacts.add(
                 Contacts(
-                id,
+                contact_id,
                 name,
                 number
             ))
 
-            allData[id] = Contacts(
-                id,
+            allData[contact_id] = Contacts(
+                contact_id,
                 name,
                 number
             )

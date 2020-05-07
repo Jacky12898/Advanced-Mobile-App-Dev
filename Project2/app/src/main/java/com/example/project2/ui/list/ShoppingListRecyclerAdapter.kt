@@ -35,7 +35,6 @@ class ShoppingListRecyclerAdapter (val context: Context, var shoppingList: List<
             pop.inflate(R.menu.context_menu)
 
             pop.setOnMenuItemClickListener {item->
-
                 when(item.itemId) {
                     R.id.visit->{
                         itemListener.visit(curItem)

@@ -1,7 +1,6 @@
 package com.example.project2.ui.search
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -15,7 +14,6 @@ class WebFragment : Fragment() {
     private lateinit var webView: WebView
     private lateinit var searchViewModel: SearchViewModel
     private lateinit var shoppingListViewModel: ShoppingListViewModel
-    var url: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,11 +36,7 @@ class WebFragment : Fragment() {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setDomStorageEnabled(true);
 
-        url = searchViewModel.url
-
-        Log.i("url", url)
-
-        webView.loadUrl(url)
+        webView.loadUrl(searchViewModel.url)
 
         return root
     }

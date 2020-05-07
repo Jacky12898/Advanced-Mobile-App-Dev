@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.project2.R
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_search.*
 
 class SearchFragment : Fragment() {
@@ -54,6 +55,11 @@ class SearchFragment : Fragment() {
         if(keywords != null && keywords != ""){
             searchViewModel.url = url
             navController.navigate(R.id.action_navigation_search_to_navigation_web)
+        }
+
+        else{
+            val snack = Snackbar.make(searchButton,"Fill out keywords field", Snackbar.LENGTH_LONG)
+            snack.show()
         }
     }
 

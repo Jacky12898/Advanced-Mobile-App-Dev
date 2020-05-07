@@ -27,6 +27,4 @@ class ShoppingListRepository(val app: Application) {
             shoppingListDAO.deleteShoppingListItem(shoppingListItem)
         }
     }
-
-    val contacts: MutableLiveData<ShoppingList> = MutableLiveData()
 }
