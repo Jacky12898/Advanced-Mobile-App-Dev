@@ -2,7 +2,6 @@ package com.example.project2.ui.list
 
 import android.os.Bundle
 import android.view.*
-import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -11,22 +10,23 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.project2.R
 import com.example.project2.data.database.ShoppingList
+import com.example.project2.ui.search.SearchViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.main.shopping_list_item.view.*
 
 class ShoppingListFragment : Fragment(), ShoppingListRecyclerAdapter.ShoppingListItemListener {
     private lateinit var shoppingListViewModel: ShoppingListViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var navController: NavController
     private lateinit var actionButton: FloatingActionButton
+    private lateinit var searchViewModel: SearchViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        shoppingListViewModel =
-            ViewModelProvider(requireActivity()).get(ShoppingListViewModel::class.java)
+        shoppingListViewModel = ViewModelProvider(requireActivity()).get(ShoppingListViewModel::class.java)
+        searchViewModel = ViewModelProvider(requireActivity()).get(SearchViewModel::class.java)
 
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
 
@@ -47,31 +47,23 @@ class ShoppingListFragment : Fragment(), ShoppingListRecyclerAdapter.ShoppingLis
     }
 
     override fun onShoppingListItemClick(shoppingListItem: ShoppingList) {
-        //registerForContextMenu(recyclerView)
-
         //shoppingListViewModel.deleteShoppingListItem(shoppingListItem)
     }
 
-    override fun onCreateContextMenu(
-        menu: ContextMenu,
-        v: View,
-        menuInfo: ContextMenu.ContextMenuInfo?
-    ) {
-        super.onCreateContextMenu(menu, v, menuInfo)
-
-        menu.add(0, v.id, 0, "Visit")
-        menu.add(0, v.id, 1, "Edit")
-        menu.add(0, v.id, 2, "Delete")
+    override fun visit(shoppingListItem: ShoppingList){
+        searchViewModel.url = shoppingListItem.url
+        navController.navigate(R.id.action_navigation_list_to_navigation_web)
     }
 
-    override fun onContextItemSelected(item: MenuItem): Boolean {
-        when(item.title){
-            //"Visit" -> shoppingListViewModel.deleteShoppingListItem()
-            //"Edit" -> url = parseGoogleShoppingUrl(keywords, minPrice, maxPrice)
-            //"Delete" -> url = "https://www.ebay.com"
-        }
-
-        return super.onContextItemSelected(item)
+    override fun edit(shoppingListItem: ShoppingList){
+        navController.navigate(R.id.action_navigation_list_to_navigation_add_item)
+        shoppingListViewModel.replace = true
+        shoppingListViewModel.replaceLabel = shoppingListItem.label
+        shoppingListViewModel.replaceUrl = shoppingListItem.url
+        shoppingListViewModel.deleteShoppingListItem(shoppingListItem)
     }
 
+    override fun delete(shoppingListItem: ShoppingList){
+        shoppingListViewModel.deleteShoppingListItem(shoppingListItem)
+    }
 }

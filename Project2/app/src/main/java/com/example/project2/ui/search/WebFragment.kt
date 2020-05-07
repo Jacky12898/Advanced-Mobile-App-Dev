@@ -1,26 +1,20 @@
 package com.example.project2.ui.search
 
 import android.os.Bundle
-import android.os.Debug
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.webkit.WebChromeClient
+import android.view.*
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.example.project2.R
-import kotlinx.android.synthetic.main.fragment_web.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.example.project2.ui.list.ShoppingListViewModel
 
-class WebFragment : Fragment(){
+class WebFragment : Fragment() {
     private lateinit var webView: WebView
     private lateinit var searchViewModel: SearchViewModel
+    private lateinit var shoppingListViewModel: ShoppingListViewModel
     var url: String = ""
 
     override fun onCreateView(
@@ -28,8 +22,10 @@ class WebFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        searchViewModel =
-            ViewModelProviders.of(this).get(SearchViewModel::class.java)
+        setHasOptionsMenu(true)
+        searchViewModel = ViewModelProvider(requireActivity()).get(SearchViewModel::class.java)
+        shoppingListViewModel = ViewModelProvider(requireActivity()).get(ShoppingListViewModel::class.java)
+
         val root = inflater.inflate(R.layout.fragment_web, container, false)
 
         webView = root.findViewById(R.id.webView)
@@ -42,22 +38,30 @@ class WebFragment : Fragment(){
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setDomStorageEnabled(true);
 
-        //webView.loadUrl(uri)
+        url = searchViewModel.url
 
-        searchViewModel.url.observe(viewLifecycleOwner, Observer<String>{
-            Log.i("url", it)
-            url = it
-        })
-
-        Log.i("url", searchViewModel.url.value)
+        Log.i("url", url)
 
         webView.loadUrl(url)
+
         return root
     }
 
-    fun searchOnWeb(url: String){
-        val web = webView
-        Log.i("url", url)
-        web.loadUrl(url)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.add_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.add_item){
+            shoppingListViewModel.replace = true
+            shoppingListViewModel.replaceLabel = ""
+            shoppingListViewModel.replaceUrl = webView.url
+
+            val navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
+            navController.navigate(R.id.action_navigation_web_to_navigation_add_item)
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 }

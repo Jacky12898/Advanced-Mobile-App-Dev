@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Lab 8</string>
+
+    <string name="title_contacts_list">Contacts List</string>
+    <string name="title_add_contact">Add Contact</string>
+    <string name="name">Name</string>
+    <string name="number">Number</string>
+    <string name="save">Save</string>
+
+</resources>

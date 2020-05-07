@@ -23,13 +23,20 @@
         <action
             android:id="@+id/action_navigation_list_to_navigation_add_item"
             app:destination="@id/navigation_add_item" />
+        <action
+            android:id="@+id/action_navigation_list_to_navigation_web"
+            app:destination="@id/navigation_web" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_web"
         android:name="com.example.project2.ui.search.WebFragment"
         android:label="@string/title_search"
-        tools:layout="@layout/fragment_web" />
+        tools:layout="@layout/fragment_web" >
+        <action
+            android:id="@+id/action_navigation_web_to_navigation_add_item"
+            app:destination="@id/navigation_add_item" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_add_item"

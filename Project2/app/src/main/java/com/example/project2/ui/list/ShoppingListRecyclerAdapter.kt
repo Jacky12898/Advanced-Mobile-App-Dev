@@ -1,18 +1,14 @@
 package com.example.project2.ui.list
 
 import android.content.Context
-import android.view.ContextMenu
-import android.view.ContextMenu.ContextMenuInfo
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.project2.R
 import com.example.project2.data.database.ShoppingList
-import com.example.project2.ui.search.WebFragment
 
 
 class ShoppingListRecyclerAdapter (val context: Context, var shoppingList: List<ShoppingList>, val itemListener: ShoppingListItemListener) : RecyclerView.Adapter<ShoppingListRecyclerAdapter.ViewHolder>(){
@@ -41,9 +37,17 @@ class ShoppingListRecyclerAdapter (val context: Context, var shoppingList: List<
             pop.setOnMenuItemClickListener {item->
 
                 when(item.itemId) {
-                    R.id.visit->{ WebFragment().searchOnWeb(curItem.url)}
-                    R.id.edit->{ }
-                    R.id.delete->{}
+                    R.id.visit->{
+                        itemListener.visit(curItem)
+                    }
+
+                    R.id.edit->{
+                        itemListener.edit(curItem)
+                    }
+
+                    R.id.delete->{
+                        itemListener.delete(curItem)
+                    }
                 }
                 true
             }
@@ -54,5 +58,8 @@ class ShoppingListRecyclerAdapter (val context: Context, var shoppingList: List<
 
     interface ShoppingListItemListener {
         fun onShoppingListItemClick(shoppingListItem: ShoppingList)
+        fun delete(shoppingListItem: ShoppingList)
+        fun edit(shoppingListItem: ShoppingList)
+        fun visit(shoppingListItem: ShoppingList)
     }
 }

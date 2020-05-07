@@ -1,6 +1,7 @@
 package com.example.project2.ui.list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import androidx.navigation.Navigation
 import com.example.project2.R
 import com.example.project2.data.database.ShoppingList
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_add_item.*
 
 class AddListItemFragment: Fragment(){
     private lateinit var navController: NavController
@@ -27,8 +29,7 @@ class AddListItemFragment: Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        shoppingListViewModel =
-            ViewModelProvider(requireActivity()).get(ShoppingListViewModel::class.java)
+        shoppingListViewModel = ViewModelProvider(requireActivity()).get(ShoppingListViewModel::class.java)
 
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
 
@@ -38,6 +39,11 @@ class AddListItemFragment: Fragment(){
         url = root.findViewById(R.id.urlEditText)
         saveButton = root.findViewById(R.id.saveButton)
 
+        if(shoppingListViewModel.replace){
+            label.setText(shoppingListViewModel.replaceLabel)
+            url.setText(shoppingListViewModel.replaceUrl)
+        }
+
         saveButton.setOnClickListener{
 
             if(label.text.toString() == "" || url.text.toString() == "") {
@@ -45,13 +51,23 @@ class AddListItemFragment: Fragment(){
                 snack.show()
             }
 
+            else if(!url.text.contains("https://")){
+                val snack = Snackbar.make(it,"Enter valid url with https://", Snackbar.LENGTH_LONG)
+                snack.show()
+            }
+
             else{
-                newListItem = ShoppingList((0 until 1000).random(), label.text.toString(), url.text.toString())
+                newListItem = ShoppingList((0..1000).random(), label.text.toString(), url.text.toString())
                 shoppingListViewModel.addShoppingListItem(newListItem)
                 navController.navigate(R.id.action_navigation_add_item_to_navigation_list)
             }
         }
 
         return root
+    }
+
+    fun replaceText(shoppingListItem: ShoppingList){
+        label.setText(shoppingListItem.label)
+        url.setText(shoppingListItem.url)
     }
 }
